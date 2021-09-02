@@ -1,7 +1,9 @@
+import 'react-native-gesture-handler';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import HomeScreen from './screens/HomeScreen';
 import DetailsScreen from './screens/DetailsScreen';
@@ -12,9 +14,6 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [logged, isLogged] = useState(false)
-
-  console.log(logged)
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home"
@@ -48,12 +47,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
