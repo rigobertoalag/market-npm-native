@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, Button, FlatList, StyleSheet } from 'react-native'
 
 import MainCategories from './categories/MainCategories';
+import MainItems from './items/MainItems';
 
 const DATA = [
     {
@@ -34,12 +35,14 @@ export default function HomeScreen({ navigation }) {
         <View>
 
             {/* Carrousel */}
-            <View style={{ backgroundColor: 'grey', height: '20%' }}>
+            <View style={{ backgroundColor: 'grey', height: '15%' }}>
                 <Text>aqui va el carousel</Text>
             </View>
 
             {/* Se muestra la barra de categorias */}
             <MainCategories />
+
+            <MainItems />
 
             {/* Lista de productos */}
             <FlatList

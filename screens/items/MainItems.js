@@ -14,7 +14,9 @@ export default function MainItems(){
                 <Text>Description del producto</Text>
             </View>
             <View>
-                <Button>Ver mas..</Button>
+                <Button 
+                    title="Ver mas.."
+                />
                 <View style={{ alignSelf: 'flex-end'}}>
                     <Text>Precio del producto</Text>
                 </View>
