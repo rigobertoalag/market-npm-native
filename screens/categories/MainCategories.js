@@ -43,7 +43,7 @@ function Items({ text }) {
 
 export default function MainCategories() {
     return (
-        <View style={{ height: '11%' }}>
+        <View style={{ height: 135 }}>
             <ScrollView horizontal={true}>
                 {
                     categories.map((c) => 
@@ -63,6 +63,6 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         alignSelf: 'center',
         backgroundColor: 'gray',
-        marginBottom: 10
+        marginBottom: 15
     }
 })
