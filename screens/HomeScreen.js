@@ -23,7 +23,8 @@ export default function HomeScreen({ navigation }) {
             <MainCategories />
 
             {/* Se muestran los productos */}
-            <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10, marginLeft:10 }}>
+            <View style={{ flexDirection: "row", flexWrap: "wrap", alignContent:'center', justifyContent:'center'}}> 
+            {/*marginTop: 10, marginLeft:10*/}
                 <MainItems />
                 <MainItems />
                 <MainItems />
