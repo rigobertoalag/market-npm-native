@@ -26,9 +26,6 @@ export default function HomeScreen({ navigation }) {
             <View style={{ flexDirection: "row", flexWrap: "wrap", alignContent:'center', justifyContent:'center'}}> 
             {/*marginTop: 10, marginLeft:10*/}
                 <MainItems />
-                <MainItems />
-                <MainItems />
-                <MainItems />
             </View>
 
         </ScrollView>
