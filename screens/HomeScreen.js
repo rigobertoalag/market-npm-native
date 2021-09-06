@@ -1,19 +1,38 @@
 import React from 'react'
-import { View, Text, Button } from 'react-native'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
+
+import MainCategories from './categories/MainCategories';
+import MainItems from './items/MainItems';
+
+const Carousel = () => (
+    <View style={{ backgroundColor: 'grey', height: 200 }}>
+        <Text>aqui va el carousel</Text>
+    </View>
+)
 
 export default function HomeScreen({ navigation }) {
-    return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Home Screen</Text>
-            <Button
-                title="Go to Details"
-                onPress={() => navigation.navigate('Details')}
-            />
 
-            <Button
-                title="Login"
-                onPress={() => navigation.navigate('login')}
-            />
-        </View>
+    return (
+        // <View styles={{  }}>
+        <ScrollView style={{ marginVertical: 100, marginBottom: 0, marginTop:0 }}>
+
+            {/* Carrusel */}
+            <Carousel />
+
+            {/* Se muestra la barra de categorias */}
+            <MainCategories />
+
+            {/* Se muestran los productos */}
+            <View style={{ flexDirection: "row", flexWrap: "wrap", alignContent:'center', justifyContent:'center'}}> 
+            {/*marginTop: 10, marginLeft:10*/}
+                <MainItems />
+            </View>
+
+        </ScrollView>
+        // </View>
     );
 }
+
+const styles = StyleSheet.create({
+    
+})
