@@ -10,7 +10,7 @@ const Carousel = () => (
     </View>
 )
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({navigation}) {
 
     return (
         // <View styles={{  }}>
@@ -25,7 +25,7 @@ export default function HomeScreen({ navigation }) {
             {/* Se muestran los productos */}
             <View style={{ flexDirection: "row", flexWrap: "wrap", alignContent:'center', justifyContent:'center'}}> 
             {/*marginTop: 10, marginLeft:10*/}
-                <MainItems />
+                <MainItems navigation={navigation}/>
             </View>
 
         </ScrollView>
