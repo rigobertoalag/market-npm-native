@@ -1,83 +1,62 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Button } from 'react-native'
 import { TouchableHighlight } from 'react-native-gesture-handler'
 
-const products = [
-    {
-        id: 1,
-        img: 'image.png',
-        title: 'titulo 1',
-        price: 100,
-        description: 'lorem 1'
-    },
-    {
-        id: 2,
-        img: 'image.png',
-        title: 'titulo 2',
-        price: 150,
-        description: 'lorem 2'
-    },
-    {
-        id: 3,
-        img: 'image.png',
-        title: 'titulo 3',
-        price: 200,
-        description: 'lorem 3'
-    },
-    {
-        id: 4,
-        img: 'image.png',
-        title: 'titulo 4',
-        price: 250,
-        description: 'lorem 4'
-    },
-    {
-        id: 5,
-        img: 'image.png',
-        title: 'titulo 5',
-        price: 300,
-        description: 'lorem 5'
-    },
-    {
-        id: 6,
-        img: 'image.png',
-        title: 'titulo 6',
-        price: 350,
-        description: 'lorem 6'
-    }
-]
-
 export default function MainItems({ navigation }) {
+    const [isLoading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
+
+    const getProducts = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:3000/api/v1/products');
+            const json = await response.json();
+            setData(json.data);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        getProducts();
+    }, []);
+
+    console.log(data)
+
+    // data.map((d) => console.log(d.attributes.title))
 
     return (
         <>
             {
-                products.map((p) =>
-                    <TouchableHighlight
-                        onPress={() => {
-                            navigation.navigate('deatilitem', {
-                                id: p.id,
-                                img: p.img,
-                                price: p.price,
-                                title: p.title,
-                                description: p.description
-                            })
-                        }}
-                        underlayColor="white"
-                        key={p.id}
-                    >
-                        <View style={styles.container}>
-                            <View style={styles.img}>
-                                <Text>{p.img}</Text>
-                            </View>
+                isLoading ? <Text style={{ fontSize: 50, alignSelf:'center', justifyContent:'center' }}>Cargando...</Text> :
+                    data.map((pdt) =>
+                        <TouchableHighlight
+                            onPress={() => {
+                                navigation.navigate('deatilitem', {
+                                    id: pdt.id,
+                                    img: 'test',
+                                    price: pdt.attributes.price,
+                                    title: pdt.attributes.title,
+                                    description: 'test',
+                                    quantity: pdt.attributes.quantity
+                                })
+                            }}
+                            underlayColor="white"
+                            key={pdt.id}
+                        >
+                            <View style={styles.container}>
+                                <View style={styles.img}>
+                                    <Text>Test</Text>
+                                </View>
 
-                            <View style={styles.mb}>
-                                <Text style={styles.mb}>{p.price}</Text>
-                                <Text style={styles.mb}>{p.title}</Text>
+                                <View style={styles.mb}>
+                                    <Text style={styles.mb}>{pdt.attributes.price}</Text>
+                                    <Text style={styles.mb}>{pdt.attributes.title}</Text>
+                                </View>
                             </View>
-                        </View>
-                    </TouchableHighlight>
-                )
+                        </TouchableHighlight>
+                    )
             }
         </>
     )

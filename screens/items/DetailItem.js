@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet, ScrollView } from 'react-native'
 
 export default function DetailItem({ route }) {
 
-    const { id, img, price, title, description } = route.params;
+    const { img, price, title, description, quantity } = route.params;
 
     return (
         <ScrollView style={{ marginVertical: 100, marginBottom: 0, marginTop: 0 }}>
@@ -18,7 +18,7 @@ export default function DetailItem({ route }) {
                 <Text style={styles.titles}>${price}</Text>
 
                 <View style={styles.stockBtn}>
-                    <Text style={{ color: 'white', fontSize: 15 }}>EN STOCK: 2   </Text>
+                    <Text style={{ color: 'white', fontSize: 15 }}>EN STOCK: {quantity}   </Text>
                 </View>
 
                 <View style={styles.btns}>
