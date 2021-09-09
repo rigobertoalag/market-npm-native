@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, TextInput, Button } from 'react-native'
+import { View, Text, TextInput, Button, Alert } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { styles } from './styles'
@@ -36,10 +36,22 @@ export default function Login({ navigation }) {
             .then((json) => {
                 console.log(json)
                 storeData(json)
+                // Descomentar para probar en movil
+                // Alert.alert(
+                //     "Bienvenido",
+                //     "Inicio de sesion correcto",
+                //     [
+                //         { text: "OK", onPress: () => navigation.navigate('Home') }
+                //     ]
+                // )
                 navigation.navigate('Home')
             })
             .catch((error) => {
-                console.error(error);
+                console.error('log de erores', error)
+                Alert.alert(
+                    "¡Error al iniciar sesion!",
+                    "Revisa que tu información sea correcta"
+                )
             });
     }
 

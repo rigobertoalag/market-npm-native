@@ -26,16 +26,13 @@ export default function HomeScreen({ navigation }) {
         }
     }
 
-    // Effect para no tener que hacer nada para cargar los datos del usuario obtenido
-    useEffect(() => {
-        getData();
-    });
-
     // Funcion para cerrar la sesion del usuario(elimina los datos del cache)
     const logout = async () => {
         try {
             await AsyncStorage.removeItem('@storage_Key')
             navigation.navigate('Home')
+            setUserToken('')
+            setUserEmail('')
         } catch (e) {
             // remove error
             console.log('Hubo un error')
@@ -44,6 +41,11 @@ export default function HomeScreen({ navigation }) {
     }
 
     console.log(userToken, userEmail)
+
+    // Effect para no tener que hacer nada para cargar los datos del usuario obtenido
+    useEffect(() => {
+        getData();
+    });
     
 
     return (
@@ -69,7 +71,6 @@ export default function HomeScreen({ navigation }) {
                 <Button
                 title='Cerrar sesion'
                 color='red'
-                // onPress={() => logout()}
                 onPress={() => logout()}
                 />
                 :
