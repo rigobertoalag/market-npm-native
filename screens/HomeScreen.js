@@ -11,6 +11,11 @@ const Carousel = () => (
     </View>
 )
 
+import Counter from '../features/counter/Counter'
+import store from '../store'
+import { Provider } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux'
+
 export default function HomeScreen({ navigation }) {
     const [userToken, setUserToken] = useState()
     const [userEmail, setUserEmail] = useState()
@@ -46,38 +51,33 @@ export default function HomeScreen({ navigation }) {
     useEffect(() => {
         getData();
     });
-    
+
+    const count = useSelector((state) => state.counter.value)
 
     return (
-        <ScrollView style={{ marginVertical: 100, marginBottom: 0, marginTop: 0 }}>
+        <Provider store={store}>
+            <ScrollView style={{ marginVertical: 100, marginBottom: 0, marginTop: 0 }}>
 
-            {/* Carrusel */}
-            <Carousel />
+                <Counter />
+                
 
-            {/* Se muestra la barra de categorias */}
-            <MainCategories />
+                {/* Carrusel */}
+                <Carousel />
 
-            {
-                userToken ? <Text>Hola: {userEmail}</Text> : <Text>Hola invitado, inicia sesion o vete al demonio</Text>
-            }
+                {/* Se muestra la barra de categorias */}
+                <MainCategories />
 
-            {/* Se muestran los productos */}
-            <View style={{ flexDirection: "row", flexWrap: "wrap", alignContent: 'center', justifyContent: 'center' }}>
-                <MainItems navigation={navigation} />
-            </View>
+                {
+                    userToken ? <Text>Hola: {userEmail}</Text> : <Text>Hola invitado, inicia sesion o vete al demonio</Text>
+                }
 
-            {
-                userToken ? 
-                <Button
-                title='Cerrar sesion'
-                color='red'
-                onPress={() => logout()}
-                />
-                :
-                null
-            }
+                {/* Se muestran los productos */}
+                <View style={{ flexDirection: "row", flexWrap: "wrap", alignContent: 'center', justifyContent: 'center' }}>
+                    <MainItems navigation={navigation} />
+                </View>
 
-        </ScrollView>
+            </ScrollView>
+        </Provider>
     );
 }
 

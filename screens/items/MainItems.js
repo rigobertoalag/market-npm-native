@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Button } from 'react-native'
 import { TouchableHighlight } from 'react-native-gesture-handler'
+import { useSelector } from 'react-redux'
 
 export default function MainItems({ navigation }) {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
+
+    const count = useSelector((state) => state.counter.value)
 
     const getProducts = async () => {
         try {
@@ -58,6 +61,7 @@ export default function MainItems({ navigation }) {
                         </TouchableHighlight>
                     )
             }
+            {count}
         </>
     )
 }
