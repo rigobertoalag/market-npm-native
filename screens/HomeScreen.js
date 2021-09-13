@@ -10,26 +10,24 @@ const Carousel = () => (
         <Text>aqui va el carousel</Text>
     </View>
 )
-
-import Counter from '../features/counter/Counter'
-import store from '../store'
-import { Provider } from 'react-redux';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 export default function HomeScreen({ navigation }) {
     const [userToken, setUserToken] = useState()
     const [userEmail, setUserEmail] = useState()
 
-    // Funcion que obtiene los datos del usuario logeado
-    const getData = async () => {
-        try {
-            const jsonValue = await AsyncStorage.getItem('@storage_Key')
-            return jsonValue != null ? (setUserToken(JSON.parse(jsonValue).token), setUserEmail(JSON.parse(jsonValue).email)) : console.log('Inicia sesion')
-        } catch (e) {
-            // error reading value
-            console.log('Hubo un error')
-        }
-    }
+    const token = useSelector((state) => state.dataUser.utoken)
+
+    // // Funcion que obtiene los datos del usuario logeado
+    // const getData = async () => {
+    //     try {
+    //         const jsonValue = await AsyncStorage.getItem('@storage_Key')
+    //         return jsonValue != null ? (setUserToken(JSON.parse(jsonValue).token), setUserEmail(JSON.parse(jsonValue).email)) : console.log('Inicia sesion')
+    //     } catch (e) {
+    //         // error reading value
+    //         console.log('Hubo un error')
+    //     }
+    // }
 
     // Funcion para cerrar la sesion del usuario(elimina los datos del cache)
     const logout = async () => {
@@ -47,37 +45,37 @@ export default function HomeScreen({ navigation }) {
 
     console.log(userToken, userEmail)
 
-    // Effect para no tener que hacer nada para cargar los datos del usuario obtenido
-    useEffect(() => {
-        getData();
-    });
-
-    const count = useSelector((state) => state.counter.value)
+    // // Effect para no tener que hacer nada para cargar los datos del usuario obtenido
+    // useEffect(() => {
+    //     getData();
+    // });
 
     return (
-        <Provider store={store}>
-            <ScrollView style={{ marginVertical: 100, marginBottom: 0, marginTop: 0 }}>
+        <ScrollView style={{ marginVertical: 100, marginBottom: 0, marginTop: 0 }}>
 
-                <Counter />
-                
+            <Text>hola este esl toke desde homescreen: {token}</Text>
 
-                {/* Carrusel */}
-                <Carousel />
 
-                {/* Se muestra la barra de categorias */}
-                <MainCategories />
+            {/* Carrusel */}
+            <Carousel />
 
-                {
-                    userToken ? <Text>Hola: {userEmail}</Text> : <Text>Hola invitado, inicia sesion o vete al demonio</Text>
-                }
+            {/* Se muestra la barra de categorias */}
+            <MainCategories />
 
-                {/* Se muestran los productos */}
-                <View style={{ flexDirection: "row", flexWrap: "wrap", alignContent: 'center', justifyContent: 'center' }}>
-                    <MainItems navigation={navigation} />
-                </View>
+            {/* {
+                userToken ? <Text>Hola: {userEmail}</Text> : <Text>Hola invitado, inicia sesion o vete al demonio</Text>
+            } */}
 
-            </ScrollView>
-        </Provider>
+            {
+                token ? <Text>Hola: {userEmail}</Text> : <Text>Hola invitado, inicia sesion o vete al demonio</Text>
+            }
+
+            {/* Se muestran los productos */}
+            <View style={{ flexDirection: "row", flexWrap: "wrap", alignContent: 'center', justifyContent: 'center' }}>
+                <MainItems navigation={navigation} />
+            </View>
+
+        </ScrollView>
     );
 }
 

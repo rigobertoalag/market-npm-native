@@ -2,11 +2,18 @@ import React, { useState } from 'react'
 import { View, Text, TextInput, Button, Alert } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { useSelector, useDispatch } from 'react-redux'
+import { setToken } from '../../features/data/dataUser'
+
 import { styles } from './styles'
 
 export default function Login({ navigation }) {
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
+
+    const token = useSelector((state) => state.dataUser.utoken)
+    const dispatch = useDispatch()
+
 
     const storeData = async (value) => {
         try {
@@ -36,6 +43,7 @@ export default function Login({ navigation }) {
             .then((json) => {
                 console.log(json)
                 storeData(json)
+                dispatch(setToken())
                 // Descomentar para probar en movil
                 // Alert.alert(
                 //     "Bienvenido",
@@ -95,6 +103,13 @@ export default function Login({ navigation }) {
                     onPress={() => navigation.navigate('register')}
                 />
             </View>
+
+            <Button 
+                title='genera token'
+                onPress={() => dispatch(setToken())}
+            />
+
+            <Text>Este es el token: {token}</Text>
         </View>
     )
 }

@@ -1,19 +1,20 @@
-import {createSlice} from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
-export const userDataSlice = createSlice({
-    name: 'userData',
-    initialState:{
-        token: '',
-        email: ''
+const userToken = 'token12355555'
+console.log('token de prueba: ' + userToken)
+
+export const dataUserSlice = createSlice({
+    name: 'dataUser',
+    initialState: {
+        utoken: ''
     },
-    reducers:{
-        setToken: (state) =>{
-            state.token = 'soyeltoken'
-            state.email = 'mail@mail.com'
+    reducers: {
+        setToken: (state) => {
+            state.utoken = userToken
         }
-    }
+    },
 })
 
-export const { setToken } = userDataSlice.actions
+export const { setToken } = dataUserSlice.actions
 
-export default userDataSlice.reducer
+export default dataUserSlice.reducer
